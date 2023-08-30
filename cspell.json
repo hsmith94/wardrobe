@@ -4,8 +4,7 @@
     "dictionaryDefinitions": [],
     "dictionaries": [],
     "words": [
-        "Datasource",
-        "middlewares"
+        "InnoDB"
     ],
     "ignoreWords": [],
     "import": []
