@@ -1,6 +1,7 @@
 import { noop } from 'lodash';
-import { Connection, Datasource, Errors } from './datasource';
 import * as mysql from 'mysql';
+import { Connection, Datasource } from './datasource';
+import { DatasourceErrors } from './datasource-errors';
 
 describe('Datasource', () => {
     let mockConnection: mysql.Connection;
@@ -36,7 +37,7 @@ describe('Datasource', () => {
             const database = 'test_db';
 
             // Act
-            datasource.configure(host, port, username, password, database);
+            datasource.configure({ host, port, username, password, database });
 
             // Assert
             expect(datasource['host']).toEqual(host);
@@ -56,7 +57,7 @@ describe('Datasource', () => {
             const username = 'root';
             const password = 'password';
             const database = 'test_db';
-            datasource.configure(host, port, username, password, database);
+            datasource.configure({ host, port, username, password, database });
 
             // Act
             await datasource.start();
@@ -68,7 +69,7 @@ describe('Datasource', () => {
 
         it('should throw an error if datasource is not configured', async () => {
             // Act & Assert
-            await expect(datasource.start()).rejects.toThrow(Errors.DatasourceError);
+            await expect(datasource.start()).rejects.toThrow(DatasourceErrors.DatasourceError);
         });
     });
 
@@ -80,7 +81,7 @@ describe('Datasource', () => {
             const username = 'root';
             const password = 'password';
             const database = 'test_db';
-            datasource.configure(host, port, username, password, database);
+            datasource.configure({ host, port, username, password, database });
             await datasource.start();
 
             // Act
@@ -98,10 +99,10 @@ describe('Datasource', () => {
             const username = 'root';
             const password = 'password';
             const database = 'test_db';
-            datasource.configure(host, port, username, password, database);
+            datasource.configure({ host, port, username, password, database });
 
             // Act & Assert
-            await expect(datasource.stop()).rejects.toThrow(Errors.DatasourceError);
+            await expect(datasource.stop()).rejects.toThrow(DatasourceErrors.DatasourceError);
         });
     });
 
@@ -113,7 +114,7 @@ describe('Datasource', () => {
             const username = 'root';
             const password = 'password';
             const database = 'test_db';
-            datasource.configure(host, port, username, password, database);
+            datasource.configure({ host, port, username, password, database });
             await datasource.start();
 
             const mockConnection = {} as mysql.Connection;
@@ -137,10 +138,10 @@ describe('Datasource', () => {
             const username = 'root';
             const password = 'password';
             const database = 'test_db';
-            datasource.configure(host, port, username, password, database);
+            datasource.configure({ host, port, username, password, database });
 
             // Act & Assert
-            await expect(datasource.connect(noop)).rejects.toThrow(Errors.DatasourceError);
+            await expect(datasource.connect(noop)).rejects.toThrow(DatasourceErrors.DatasourceError);
         });
     });
 });

@@ -1,6 +1,6 @@
-import express from "express";
+import express from 'express';
 
-export type RouteHandler = (req: any, res: any) => void;
+export type RouteHandler = (req: any, res: any, next?: any) => void;
 export type RouteMiddleware = express.Handler | express.ErrorRequestHandler;
 
 type RouteConfig = {

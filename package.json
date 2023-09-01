@@ -2,10 +2,10 @@
   "name": "wardrobe",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm run --prefix backend dev"
+    "dev": "concurrently -n frontend,database,backend -c magenta,yellow,green \"npm run --prefix frontend dev\" \"npm run --prefix database dev\" \"npm run --prefix backend dev\"",
+    "dev:watch": "concurrently -n frontend,database,backend -c magenta,yellow,green \"npm run --prefix frontend dev:watch\" \"npm run --prefix database dev\" \"npm run --prefix backend dev:watch\""
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,8 @@
     "node": "16",
     "npm": "8"
   },
-  "engineStrict": true
+  "engineStrict": true,
+  "devDependencies": {
+    "concurrently": "^8.2.1"
+  }
 }

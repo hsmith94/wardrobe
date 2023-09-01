@@ -1,53 +1,11 @@
 import * as mysql from 'mysql';
-
-export namespace Errors {
-    export class DatasourceError extends Error {
-        constructor(message: string) {
-            super(message);
-        }
-    }
-    export class DatasourceNotReady extends DatasourceError {
-        constructor() {
-            super('Datasource is not ready');
-        }
-    }
-    export class DatasourceNotConfigured extends DatasourceError {
-        constructor() {
-            super('Datasource is not configured');
-        }
-    }
-    export class DatasourceNotStarted extends DatasourceError {
-        constructor() {
-            super('Datasource is not started');
-        }
-    }
-    export class DatasourceAlreadyConfigured extends DatasourceError {
-        constructor() {
-            super('Datasource is already configured');
-        }
-    }
-    export class DatasourceAlreadyStarted extends DatasourceError {
-        constructor() {
-            super('Datasource is already started');
-        }
-    }
-    export class DatasourceAlreadyStopped extends DatasourceError {
-        constructor() {
-            super('Datasource is already stopped');
-        }
-    }
-    export class DatasourceStopped extends DatasourceError {
-        constructor() {
-            super('Datasource is stopped');
-        }
-    }
-}
+import { DatasourceErrors } from './datasource-errors';
 
 export class Connection {
     constructor(private connection: mysql.Connection) {}
-    public async query(sql: string, params?: any[]): Promise<any[]> {
+    public async query<T = any>(sql: string, params?: any[]): Promise<T[]> {
         return new Promise((resolve, reject) => {
-            this.connection.query(sql, params, (err, results) => {
+            this.connection.query(sql, params, (err, results: T[]) => {
                 if (err) {
                     reject(err);
                     return;
@@ -77,19 +35,25 @@ export class Datasource {
 
     constructor(private mysqlClient: typeof mysql) {}
 
-    public configure(host: string, port: number, username: string, password: string, database?: string): this {
+    public configure(config: {
+        host: string;
+        port: number;
+        username: string;
+        password: string;
+        database?: string;
+    }): this {
         if (this.isStopped) {
-            throw new Errors.DatasourceStopped();
+            throw new DatasourceErrors.DatasourceStopped();
         }
         if (this.isConfigured) {
-            throw new Errors.DatasourceAlreadyConfigured();
+            throw new DatasourceErrors.DatasourceAlreadyConfigured();
         }
 
-        this.host = host;
-        this.port = port;
-        this.username = username;
-        this.password = password;
-        this.database = database;
+        this.host = config.host;
+        this.port = config.port;
+        this.username = config.username;
+        this.password = config.password;
+        this.database = config.database;
 
         this.isConfigured = true;
 
@@ -98,13 +62,13 @@ export class Datasource {
 
     public async start(): Promise<void> {
         if (this.isStopped) {
-            throw new Errors.DatasourceStopped();
+            throw new DatasourceErrors.DatasourceStopped();
         }
         if (!this.isConfigured) {
-            throw new Errors.DatasourceNotConfigured();
+            throw new DatasourceErrors.DatasourceNotConfigured();
         }
         if (this.isStarted) {
-            throw new Errors.DatasourceAlreadyStarted();
+            throw new DatasourceErrors.DatasourceAlreadyStarted();
         }
         return new Promise((resolve, reject) => {
             const pool = this.mysqlClient.createPool({
@@ -130,10 +94,10 @@ export class Datasource {
 
     public async stop(): Promise<void> {
         if (this.isStopped) {
-            throw new Errors.DatasourceAlreadyStopped();
+            throw new DatasourceErrors.DatasourceAlreadyStopped();
         }
         if (!this.isReady) {
-            throw new Errors.DatasourceNotReady();
+            throw new DatasourceErrors.DatasourceNotReady();
         }
         return new Promise((resolve, reject) => {
             this.pool.end((err) => {
@@ -154,12 +118,12 @@ export class Datasource {
      *       return connection.query('SELECT * FROM users');
      *    });
      */
-    public async connect(callback: (connection: Connection) => void): Promise<void> {
+    public async connect<T = any>(callback: (connection: Connection) => T): Promise<T> {
         if (this.isStopped) {
-            throw new Errors.DatasourceStopped();
+            throw new DatasourceErrors.DatasourceStopped();
         }
         if (!this.isReady) {
-            throw new Errors.DatasourceNotReady();
+            throw new DatasourceErrors.DatasourceNotReady();
         }
         return new Promise((resolve, reject) => {
             this.pool.getConnection((err, rawConnection) => {

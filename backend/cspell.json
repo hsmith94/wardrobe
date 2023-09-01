@@ -7,6 +7,8 @@
         "Datasource",
         "middlewares"
     ],
-    "ignoreWords": [],
+    "ignoreWords": [
+        "ARRAYAGG"
+    ],
     "import": []
 }
