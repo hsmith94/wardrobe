@@ -1,6 +1,6 @@
 import express from 'express';
 
-export namespace HealthCheckEndpoint {
+export module HealthCheckEndpoint {
     export const doHealthCheck = (req: express.Request, res: express.Response) => {
         const PASS_MESSAGE = 'Health check passed!';
         const FAIL_MESSAGE = 'Health check failed!';

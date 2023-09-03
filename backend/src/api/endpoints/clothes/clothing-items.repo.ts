@@ -21,7 +21,10 @@ namespace QueryBuilder {
     namespace Errors {
         export class RequiredPropertyError extends Error {
             constructor(property: string) {
+                const prototype = new.target.prototype;
                 super(`Missing required property: ${property}`);
+                Object.setPrototypeOf(this, prototype);
+                this.name = 'ApiError';
             }
         }
     }
@@ -53,13 +56,20 @@ namespace QueryBuilder {
                 SELECT
                     items.*,
                     JSON_ARRAYAGG(
-                        JSON_OBJECT(
-                            item_properties.property_key, item_properties.value,
-                            'metadata', CAST(item_properties.metadata AS JSON)
+                        IF(
+                            item_properties.property_key IS NULL,
+                            -- then
+                            NULL,
+                            -- else
+                            JSON_OBJECT(
+                                'key', item_properties.property_key,
+                                'value', item_properties.value,
+                                'metadata', CAST(item_properties.metadata AS JSON)
+                            )
                         )
                     ) AS properties
                 FROM items
-                JOIN item_properties ON items.item_id = item_properties.item_id
+                LEFT JOIN item_properties ON items.item_id = item_properties.item_id
                 WHERE items.delete_date IS NULL
                     ${conditions.map((condition) => condition.query).join('\n')}
                 GROUP BY items.item_id

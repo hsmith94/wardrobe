@@ -1,5 +1,7 @@
+import { compact } from 'lodash';
 import { DtoErrors } from '../../errors/dto-errors';
 import { UserId } from '../../models/user.model';
+import { jsonParse } from '../../utils/json-parse';
 import { ClothingItemRow, ClothingItemRowDto } from './clothing-items.repo';
 
 export type ClothingItemId = string;
@@ -9,7 +11,8 @@ type ClothingItemMetadata = {
 };
 
 type ClothingItemProperty = {
-    [key: string]: string;
+    key: string;
+    value: string;
 } & {
     metadata: ClothingItemMetadata;
 };
@@ -27,6 +30,9 @@ export interface ClothingItem {
 
 export class ClothingItemDto {
     static fromClothesRow(row: ClothingItemRow): ClothingItem {
+        const cleanProperties = (properties: ClothingItemProperty[]) => {
+            return compact(properties);
+        };
         return {
             itemId: row.item_id,
             userId: row.user_id,
@@ -35,7 +41,7 @@ export class ClothingItemDto {
             picture: row.picture,
             createDate: row.create_date,
             updateDate: row.update_date,
-            properties: JSON.parse(row.properties),
+            properties: cleanProperties(jsonParse<ClothingItemProperty[]>(row.properties)),
         };
     }
 
