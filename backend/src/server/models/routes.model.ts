@@ -35,13 +35,4 @@ export class Route {
         route.middlewares = config.middlewares ?? [];
         return route;
     }
-
-    static fromStaticDir(config: { path: string; staticPath: string }): Route {
-        console.log(config);
-        return Route.fromConfig({
-            path: config.path,
-            method: RouteMethod.GET,
-            handler: express.static(config.staticPath),
-        });
-    }
 }

@@ -1,5 +1,5 @@
 import express from 'express';
-import { ApiErrors } from '../../errors/api-errors';
+import { HttpErrors } from '../../errors/http-errors';
 import { Request } from '../../models/request.model';
 import { provideClothesHandler } from './clothes-handler.provider';
 import { ClothesHandler } from './clothes.handler';
@@ -11,7 +11,7 @@ export module ClothesEndpoint {
             await clothesHandler.getClothes(req, res);
         } catch (err) {
             console.error(err);
-            if (err instanceof ApiErrors.NotFoundError) {
+            if (err instanceof HttpErrors.NotFoundError) {
                 res.sendStatus(404);
                 return;
             }
@@ -25,7 +25,7 @@ export module ClothesEndpoint {
             await clothesHandler.getClothingItem(req, res);
         } catch (err) {
             console.error(err);
-            if (err instanceof ApiErrors.NotFoundError) {
+            if (err instanceof HttpErrors.NotFoundError) {
                 res.sendStatus(404);
                 return;
             }

@@ -1,5 +1,5 @@
 import { Connection } from '../../../datasource/datasource';
-import { ApiErrors } from '../../errors/api-errors';
+import { HttpErrors } from '../../errors/http-errors';
 import { UserId } from '../../models/user.model';
 import { ClothingItem, ClothingItemDto, ClothingItemId } from './clothing-item.model';
 
@@ -110,7 +110,7 @@ export class ClothingItemsRepo {
         const { query, params } = QueryBuilder.buildSelectItemQuery(userId, itemId);
         const rows = await this.connection.query<ClothingItemRow>(query, params);
         if (rows.length === 0) {
-            throw new ApiErrors.NotFoundError(`Clothing Item with id "${itemId}" not found`);
+            throw new HttpErrors.NotFoundError(`Clothing Item with id "${itemId}" not found`);
         }
         if (rows.length > 1) {
             throw new Error(`Too many Clothing Items found with id "${itemId}"`);

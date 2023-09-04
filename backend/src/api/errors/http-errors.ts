@@ -1,13 +1,13 @@
-export namespace ApiErrors {
-    export class ApiError extends Error {
+export namespace HttpErrors {
+    export class HttpError extends Error {
         constructor(message: string) {
             const prototype = new.target.prototype;
             super(message);
             Object.setPrototypeOf(this, prototype);
-            this.name = 'ApiError';
+            this.name = 'HttpError';
         }
     }
-    export class NotFoundError extends ApiError {
+    export class NotFoundError extends HttpError {
         constructor(message: string) {
             const prototype = new.target.prototype;
             super(message);
