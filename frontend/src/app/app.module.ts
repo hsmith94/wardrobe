@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppViewsModule } from './app-views.module';
@@ -15,7 +14,7 @@ import { MainToolbarModule } from './shared/components/main-toolbar/main-toolbar
         AppViewsModule,
         BrowserAnimationsModule,
         BrowserModule,
-        MainToolbarModule
+        MainToolbarModule,
     ],
     providers: [],
     bootstrap: [AppComponent],

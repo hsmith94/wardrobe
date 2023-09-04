@@ -2,17 +2,31 @@
 
 @include mat.core();
 
-$wardrobe-app-primary: mat.define-palette(mat.$indigo-palette, 500);
-$wardrobe-app-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+// Define a dark theme
+$app-dark-theme: mat.define-dark-theme((color: (primary: mat.define-palette(mat.$pink-palette),
+                accent: mat.define-palette(mat.$blue-grey-palette),
+            ),
+            // Only include `typography` and `density` in the default dark theme.
+            typography: mat.define-typography-config(),
+            density: 0,
+        ));
 
-$wardrobe-app-theme: mat.define-light-theme((color: (primary: $wardrobe-app-primary, accent: $wardrobe-app-accent), density: 0));
+// Define a light theme
+$app-light-theme: mat.define-light-theme((color: (primary: mat.define-palette(mat.$indigo-palette),
+                accent: mat.define-palette(mat.$pink-palette),
+            ),
+        ));
 
-// Emit theme-dependent styles for common features used across multiple components.
-@include mat.core-theme($wardrobe-app-theme);
+// Apply the dark theme by default
+@include mat.core-theme($app-dark-theme);
+@include mat.all-component-themes($app-dark-theme);
 
-// Emit styles for MatButton based on `$wardrobe-app-theme`. Because the configuration
-// passed to `define-light-theme` omits typography, `button-theme` will not
-// emit any typography styles.
-@include mat.button-theme($wardrobe-app-theme);
+// Apply the light theme only when the user prefers light themes.
+@media (prefers-color-scheme: light) {
+    // Use the `-color` mixins to only apply color styles without reapplying the same
+    // typography and density styles.
+    @include mat.core-color($app-light-theme);
+    @include mat.all-component-themes($app-light-theme);
+}
 
 // Include the theme mixins for other components you use here.

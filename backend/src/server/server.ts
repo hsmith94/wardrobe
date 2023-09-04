@@ -1,7 +1,7 @@
 import type Express from 'express';
 import express from 'express';
-import { Route, RouteMiddleware } from './models/routes.model';
 import { applyRoutes as assignRoutes } from './helpers/routes.helper';
+import { Route, RouteMiddleware } from './models/routes.model';
 
 type ServerConfig = {
     appName: string;
@@ -20,7 +20,7 @@ export class Server {
 
     private isConfigured: boolean = false;
 
-    constructor(private express: typeof Express) { }
+    constructor(private express: typeof Express) {}
 
     public configure(config: ServerConfig): this {
         this.appName = config.appName;
