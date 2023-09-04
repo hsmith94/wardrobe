@@ -1,5 +1,5 @@
 import { ClothingItemId } from '../endpoints/clothes/clothing-item.model';
-import { Request } from '../middlewares/request.model';
+import { Request } from '../models/request.model';
 
 export namespace RequestExtractors {
     export function extractClothingItemId(req: Request): ClothingItemId {

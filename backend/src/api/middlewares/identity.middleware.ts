@@ -1,5 +1,5 @@
 import express from 'express';
-import { Request } from './request.model';
+import { Request } from '../models/request.model';
 
 const TEST_USER_ID = 'HARRY';
 

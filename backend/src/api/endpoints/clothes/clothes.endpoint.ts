@@ -1,6 +1,6 @@
 import express from 'express';
 import { ApiErrors } from '../../errors/api-errors';
-import { Request } from '../../middlewares/request.model';
+import { Request } from '../../models/request.model';
 import { provideClothesHandler } from './clothes-handler.provider';
 import { ClothesHandler } from './clothes.handler';
 

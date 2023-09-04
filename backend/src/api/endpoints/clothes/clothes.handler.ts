@@ -1,5 +1,5 @@
 import express from 'express';
-import { Request } from '../../middlewares/request.model';
+import { Request } from '../../models/request.model';
 import { RequestExtractors } from '../../utils/request-extractors';
 import { ResponseUtils } from '../../utils/response-utils';
 import { ClothesService } from './clothes.service';
