@@ -1,12 +1,12 @@
 <mat-drawer-container class="wardrobe-container" [hasBackdrop]="false">
-    <mat-drawer class="drawer-sidenav mat-elevation-z2" mode="side" [disableClose]="true">
+    <mat-drawer class="drawer-sidenav mat-elevation-z2" mode="side" [disableClose]="true" [opened]="isSidenavOpen">
         <div class="drawer-sidenav-inner">
             <ng-content select="[app-wardrobe-sidenav]"></ng-content>
         </div>
     </mat-drawer>
     <mat-drawer-content>
         <div class="drawer-content-inner">
-            <div class="wardrobe-hero-header-section">
+            <div class="wardrobe-hero-header-section" [class.is-stacked]="!isUiSideBySide">
                 <div class="wardrobe-hero-image-container">
                     <img src="https://wardrobe-public.s3.eu-west-2.amazonaws.com/static-assets/hero-image.png"
                         alt="hero image" class="wardrobe-hero-image">

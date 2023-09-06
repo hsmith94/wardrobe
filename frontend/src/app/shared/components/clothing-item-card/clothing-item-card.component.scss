@@ -15,8 +15,8 @@ $clothing-item-card-text-color: black;
 
     ::ng-deep .mat-mdc-card-image {
         object-fit: cover;
-        min-width: 100%;
-        max-height: 25vw;
+        // min-width: 100%;
+        // max-height: 25vw;
     }
 
     ::ng-deep .mat-mdc-card-content {

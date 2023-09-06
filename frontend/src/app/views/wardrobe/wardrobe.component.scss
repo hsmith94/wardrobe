@@ -1,3 +1,7 @@
+:host {
+    overflow: visible;
+}
+
 .my-clothes-card ::ng-deep .mat-grid-tile-content {
     align-items: flex-start;
 }

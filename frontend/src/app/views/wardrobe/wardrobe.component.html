@@ -20,7 +20,7 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                 <h4>My clothes</h4>
             </mat-card-header>
             <mat-card-content>
-                <mat-grid-list cols="3" rowHeight="1:1.5" gutterSize="8">
+                <mat-grid-list [cols]="gridListConfig.cols" rowHeight="1:1.5" gutterSize="8">
                     <mat-grid-tile class="clothing-item-tile" *ngFor="let clothingItem of clothes">
                         <app-clothing-item-card class="clothing-item-card"
                             [clothingItem]="clothingItem"></app-clothing-item-card>
