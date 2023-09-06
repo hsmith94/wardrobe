@@ -1,0 +1,36 @@
+@use '@angular/material' as mat;
+@use 'src/app/material/material.scss' as var;
+
+$clothing-item-card-background-color: whitesmoke;
+$clothing-item-card-text-color: black;
+
+.clothing-item-card {
+    max-width: 100%;
+    max-height: 100%;
+
+    background-color: $clothing-item-card-background-color;
+    color: $clothing-item-card-text-color;
+
+    min-width: 100%;
+
+    ::ng-deep .mat-mdc-card-image {
+        object-fit: cover;
+        min-width: 100%;
+        max-height: 25vw;
+    }
+
+    ::ng-deep .mat-mdc-card-content {
+        overflow-y: auto;
+    }
+
+    &.clickable {
+        cursor: pointer;
+
+        transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out;
+
+        &:hover {
+            background-color: lighten($clothing-item-card-background-color, 20%);
+            @extend .mat-elevation-z10;
+        }
+    }
+}

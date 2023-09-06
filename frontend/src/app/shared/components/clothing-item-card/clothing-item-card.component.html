@@ -1,0 +1,9 @@
+<mat-card class="clothing-item-card clickable" [routerLink]="'look-at/' + clothingItem.itemId">
+    <mat-card-header>
+        <h5>{{ clothingItem.name }}</h5>
+    </mat-card-header>
+    <img mat-card-image [src]="clothingItem.picture" />
+    <mat-card-content>
+        <p>{{ clothingItem.description }}</p>
+    </mat-card-content>
+</mat-card>

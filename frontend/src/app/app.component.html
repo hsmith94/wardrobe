@@ -1,5 +1,6 @@
+<a href="#main-content" class="skip-to-main-content-link">Skip to main content</a>
 <app-main-toolbar id="app-primary-toolbar"></app-main-toolbar>
-<router-outlet *ngIf="isConnected; else notConnected"></router-outlet>
+<router-outlet id="main-content" *ngIf="isConnected; else notConnected"></router-outlet>
 <ng-template #notConnected>
     <app-not-connected id="app-not-connected"></app-not-connected>
 </ng-template>

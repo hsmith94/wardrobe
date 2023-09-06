@@ -4,6 +4,23 @@
     height: 100%;
 }
 
+.skip-to-main-content-link {
+    position: absolute;
+    left: -9999px;
+    z-index: 2000;
+    padding: 1em;
+
+    background-color: black;
+    color: white;
+
+    opacity: 0;
+
+    &:focus {
+        left: 0;
+        opacity: 1;
+    }
+}
+
 app-main-toolbar#app-primary-toolbar {
     position: sticky;
     top: 0;

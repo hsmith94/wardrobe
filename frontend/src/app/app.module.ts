@@ -9,7 +9,6 @@ import { MainToolbarModule } from './shared/components/main-toolbar/main-toolbar
 import { NotConnectedModule } from './shared/components/not-connected/not-connected.module';
 import { ApiServicesModule } from './shared/services/api-services/api-services.module';
 import { ConnectionServiceModule } from './shared/services/connection-service/connection-service.module';
-import { BASE_URL_TOKEN } from './shared/tokens/base-url.token';
 
 @NgModule({
     declarations: [AppComponent],
@@ -25,7 +24,7 @@ import { BASE_URL_TOKEN } from './shared/tokens/base-url.token';
         MatSnackBarModule,
         NotConnectedModule,
     ],
-    providers: [{ provide: BASE_URL_TOKEN, useValue: 'http://localhost:3000/api/v1/' }], // TODO: Get this from environment (to enable production).
+    providers: [], // TODO: Get this from environment (to enable production).
     bootstrap: [AppComponent],
 })
 export class AppModule {}
