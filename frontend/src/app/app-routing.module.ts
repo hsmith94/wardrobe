@@ -7,13 +7,18 @@ import { WardrobeComponent } from './views/wardrobe/wardrobe.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'my-wardrobe', pathMatch: 'full' },
-    { path: 'my-wardrobe', component: WardrobeComponent },
     {
-        path: 'my-wardrobe/look-at/:id',
-        component: ClothingItemComponent,
-        resolve: {
-            item: clothingItemResolver,
-        },
+        path: 'my-wardrobe',
+        component: WardrobeComponent,
+        children: [
+            {
+                path: 'look-at/:id',
+                component: ClothingItemComponent,
+                resolve: {
+                    item: clothingItemResolver,
+                },
+            },
+        ],
     },
     { path: '**', component: NotFoundComponent },
 ];
