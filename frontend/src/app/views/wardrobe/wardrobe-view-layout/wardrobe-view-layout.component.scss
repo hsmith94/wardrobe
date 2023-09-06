@@ -1,0 +1,52 @@
+:host {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.wardrobe-hero-image-container {
+    max-width: 1000px;
+    width: 50%;
+
+    .wardrobe-hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    transform: translateY(16px);
+}
+
+.wardrobe-hero-header-section {
+    display: flex;
+    flex: 1;
+
+    flex-direction: row;
+    justify-content: start;
+    align-items: start;
+}
+
+.wardrobe-right-panel {
+    display: flex;
+    flex: 1;
+
+    height: 100%;
+
+    flex-direction: column;
+    justify-content: start;
+    align-items: start;
+
+    padding: 16px;
+}
+
+.wardrobe-main-content {
+    padding: 16px;
+}
+
+.mat-drawer-container {
+    flex: 1;
+}
+
+.sidenav-padding {
+    padding: 16px;
+}
