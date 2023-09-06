@@ -10,7 +10,11 @@ import { ConnectionService } from './shared/services/connection-service/connecti
     styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-    title = 'frontend';
+    static Selectors = {
+        NotConnectedComponent: '#app-not-connected',
+    };
+
+    title = 'Wardrobe';
 
     isConnected!: boolean;
 
@@ -25,10 +29,12 @@ export class AppComponent implements OnInit, OnDestroy {
         this.subscriptions.forEach((subscription) => subscription.unsubscribe());
     }
 
-    setConnectionStatus(isConnected: boolean): void {
+    private setIsConnected(isConnected: boolean): void {
         const pastState = this.isConnected;
         this.isConnected = isConnected;
-        if (pastState === false && this.isConnected === true) {
+
+        const newState = isConnected;
+        if (pastState === false && newState === true) {
             this.snackBar.open('Reconnected to the internet!', undefined, { duration: DEFAULT_SNACK_BAR_DURATION });
         }
     }
@@ -36,7 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.subscriptions.push(
             this.connectionService.monitor().subscribe((connectionState) => {
-                this.setConnectionStatus(connectionState.hasNetworkConnection);
+                this.setIsConnected(connectionState.hasNetworkConnection);
             }),
         );
     }

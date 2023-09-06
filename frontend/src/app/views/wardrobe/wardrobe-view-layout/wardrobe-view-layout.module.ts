@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
-import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { WardrobeViewLayoutComponent } from './wardrobe-view-layout.component';
 
 @NgModule({
     declarations: [WardrobeViewLayoutComponent],
-    imports: [RouterModule, MatSidenavModule],
+    imports: [BrowserAnimationsModule, MatSidenavModule],
     providers: [],
     bootstrap: [],
     exports: [WardrobeViewLayoutComponent],

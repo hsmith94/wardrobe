@@ -1,5 +1,5 @@
 <app-main-toolbar id="app-primary-toolbar"></app-main-toolbar>
 <router-outlet *ngIf="isConnected; else notConnected"></router-outlet>
 <ng-template #notConnected>
-    <app-not-connected></app-not-connected>
+    <app-not-connected id="app-not-connected"></app-not-connected>
 </ng-template>
