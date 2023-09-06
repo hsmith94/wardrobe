@@ -22,8 +22,8 @@
     flex: 1;
 
     flex-direction: row;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .wardrobe-right-panel {
@@ -33,8 +33,8 @@
     height: 100%;
 
     flex-direction: column;
-    justify-content: start;
-    align-items: start;
+    justify-content: flex-start;
+    align-items: flex-start;
 
     padding: 16px;
 }
@@ -47,6 +47,10 @@
     flex: 1;
 }
 
-.sidenav-padding {
+.drawer-sidenav {
+    border: none;
+}
+
+.drawer-sidenav-inner {
     padding: 16px;
 }
