@@ -1,6 +1,6 @@
-import { BreakpointObserver, BreakpointState, Breakpoints } from '@angular/cdk/layout';
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Subscription, forkJoin } from 'rxjs';
+import { BreakpointStateService } from 'src/app/shared/services/breakpoint-state/breakpoint-state.service';
 
 @Component({
     selector: 'app-wardrobe-view-layout',
@@ -13,27 +13,21 @@ export class WardrobeViewLayoutComponent implements OnInit, OnDestroy {
 
     private readonly subscriptions: Subscription[] = [];
 
-    constructor(@Inject(BreakpointObserver) private breakpointObserver: BreakpointObserver) {}
+    constructor(@Inject(BreakpointStateService) private breakpointState: BreakpointStateService) {}
 
     ngOnInit(): void {
         this.subscriptions.push(
-            this.breakpointObserver
-                .observe([
-                    // Breakpoints.XSmall,
-                    // Breakpoints.Small,
-                    Breakpoints.Medium,
-                    Breakpoints.Large,
-                    Breakpoints.XLarge,
-                ])
-                .subscribe((state: BreakpointState) => {
-                    if (state.matches) {
+            forkJoin([this.breakpointState.isMediumScreen$, this.breakpointState.isLargeScreen$]).subscribe(
+                ([isMediumScreen, isLargeScreen]) => {
+                    if (isMediumScreen || isLargeScreen) {
                         this.isUiSideBySide = true;
                         this.isSidenavOpen = true;
                     } else {
                         this.isUiSideBySide = false;
                         this.isSidenavOpen = false;
                     }
-                }),
+                },
+            ),
         );
     }
 

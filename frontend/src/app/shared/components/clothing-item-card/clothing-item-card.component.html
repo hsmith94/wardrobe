@@ -1,4 +1,4 @@
-<mat-card class="clothing-item-card clickable" [routerLink]="'look-at/' + clothingItem.itemId">
+<mat-card class="clothing-item-card clickable" routerLink="." [queryParams]="{ id: clothingItem.itemId }">
     <mat-card-header>
         <h5>{{ clothingItem.name }}</h5>
     </mat-card-header>

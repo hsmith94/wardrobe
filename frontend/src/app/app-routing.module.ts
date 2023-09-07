@@ -5,6 +5,8 @@ import { clothingItemResolver } from './views/clothing-item/clothing-item.resolv
 import { NotFoundComponent } from './views/not-found/not-found.component';
 import { WardrobeComponent } from './views/wardrobe/wardrobe.component';
 
+export const CLOTHING_ITEM_ID_QUERY_PARAM_KEY: string = 'id';
+
 const routes: Routes = [
     { path: '', redirectTo: 'my-wardrobe', pathMatch: 'full' },
     {
@@ -12,7 +14,7 @@ const routes: Routes = [
         component: WardrobeComponent,
         children: [
             {
-                path: 'look-at/:id',
+                path: 'look-at',
                 component: ClothingItemComponent,
                 resolve: {
                     item: clothingItemResolver,

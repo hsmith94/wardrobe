@@ -12,7 +12,7 @@ export class BreakpointStateService implements OnDestroy {
         Large: [Breakpoints.XLarge],
     };
 
-    private isSmallScreen$$ = new BehaviorSubject<boolean>(false);
+    private isSmallScreen$$ = new BehaviorSubject<boolean>(true); // Small screen by default ("Mobile-first")
     public isSmallScreen$: Observable<boolean> = this.isSmallScreen$$.asObservable().pipe(distinctUntilChanged());
 
     private isMediumScreen$$ = new BehaviorSubject<boolean>(false);
