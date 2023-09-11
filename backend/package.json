@@ -7,6 +7,7 @@
         "dev": "ts-node src/main.ts",
         "dev:watch": "nodemon --watch src src/main.ts",
         "start": "node dist/src/main.js",
+        "prebuild": "npm install",
         "build": "tsc --outDir dist --skipLibCheck",
         "test": "jest"
     },
