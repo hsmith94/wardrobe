@@ -16,6 +16,10 @@
         object-fit: contain;
     }
 
+    img.wardrobe-hero-image {
+        user-select: none;
+    }
+
     transform: translateY(16px);
 }
 

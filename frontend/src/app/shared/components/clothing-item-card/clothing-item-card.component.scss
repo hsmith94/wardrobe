@@ -42,3 +42,10 @@ $clothing-item-card-text-color: black;
         overflow-y: auto;
     }
 }
+
+@media (prefers-color-scheme: light) {
+    .clothing-item-card-inner {
+        background-color: white;
+        color: $clothing-item-card-text-color;
+    }
+}

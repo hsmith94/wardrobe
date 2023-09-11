@@ -1,4 +1,4 @@
 import * as express from 'express';
-import { UserId } from './user.model';
+import { UserId, UserInfo } from './user.model';
 
-export type Request = express.Request & { userId: UserId };
+export type Request = express.Request & { userId: UserId; userInfo: UserInfo };

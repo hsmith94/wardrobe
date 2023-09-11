@@ -2,6 +2,15 @@
     overflow: visible;
 }
 
+.my-wardrobe-title-text {
+    opacity: 0.6;
+    font-size: smaller;
+    margin: 0;
+    margin-bottom: -4px;
+    text-transform: uppercase;
+    user-select: none;
+}
+
 .my-clothes-card ::ng-deep .mat-grid-tile-content {
     align-items: flex-start;
 }
@@ -10,6 +19,12 @@
     overflow: visible;
 }
 
+@media (prefers-color-scheme: light) {
+    .my-clothes-card {
+        background-color: #fcfcfc;
+        color: black;
+    }
+}
 
 .clothing-item-card {
     max-width: 100%;

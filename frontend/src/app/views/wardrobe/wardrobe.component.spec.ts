@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -45,6 +46,7 @@ describe('WardrobeComponent', () => {
             declarations: [WardrobeComponent],
             // prettier-ignore
             imports: [
+                CommonModule,
                 MatCardModule,
                 MatGridListModule,
                 RouterTestingModule,
