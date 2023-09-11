@@ -74,7 +74,7 @@ export class WardrobeComponent implements OnInit, OnDestroy {
         );
     }
 
-    private removeQueryParams() {
+    private removeQueryParams(): void {
         this.router.navigate(['..'], { relativeTo: this.route });
     }
 

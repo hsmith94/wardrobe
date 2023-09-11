@@ -4,15 +4,22 @@
 $clothing-item-card-background-color: whitesmoke;
 $clothing-item-card-text-color: black;
 
-:host.clickable .clothing-item-card-inner {
+// Allow the `.clickable` class to be applied to the host element.
+:host.clickable {
     cursor: pointer;
 
-    transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    .clothing-item-card-inner {
+        transition: box-shadow 0.2s ease-in-out, background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+    }
 
-    &:hover {
-        background-color: lighten($clothing-item-card-background-color, 20%);
-        transform: scale(1.01);
-        @extend .mat-elevation-z10;
+    &:hover,
+    &:focus,
+    &.cdk-keyboard-focused {
+        .clothing-item-card-inner {
+            @extend .mat-elevation-z10;
+            background-color: lighten($clothing-item-card-background-color, 20%);
+            transform: scale(1.01);
+        }
     }
 }
 

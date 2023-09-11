@@ -12,7 +12,8 @@
     z-index: 1;
     color: black;
 
-    &:hover {
+    &:hover,
+    &.cdk-keyboard-focused {
         background-color: rgba(0, 0, 0, 0.04);
     }
 }

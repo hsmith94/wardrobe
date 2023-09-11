@@ -1,1 +1,6 @@
-<app-clothing-item-card [clothingItem]="item"></app-clothing-item-card>
+<app-clothing-item-card *ngIf="item" [clothingItem]="item">
+    <div app-clothing-item-card-actions>
+        <button mat-button color="primary" (click)="onEditClicked()">Edit</button>
+        <button mat-button color="warn" (click)="onDeleteClicked()">Delete</button>
+    </div>
+</app-clothing-item-card>

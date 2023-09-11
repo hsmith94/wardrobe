@@ -6,4 +6,7 @@
     <mat-card-content>
         <p>{{ clothingItem.description }}</p>
     </mat-card-content>
+    <mat-card-actions align="end">
+        <ng-content select="[app-clothing-item-card-actions]"></ng-content>
+    </mat-card-actions>
 </mat-card>

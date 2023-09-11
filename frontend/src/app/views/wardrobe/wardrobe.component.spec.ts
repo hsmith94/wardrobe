@@ -35,7 +35,9 @@ describe('WardrobeComponent', () => {
         clothesApiServiceMock = jasmine.createSpyObj('ClothesApiService', {
             getAllClothes: of([]),
         });
-        clothingItemModalServiceMock = jasmine.createSpyObj('ClothingItemModalService', ['show']);
+        clothingItemModalServiceMock = jasmine.createSpyObj('ClothingItemModalService', {
+            show: of(undefined),
+        });
         matSnackBarMock = jasmine.createSpyObj('MatSnackBar', ['open']);
         breakpointStateServiceMock = makeBreakpointStateServiceMock();
 

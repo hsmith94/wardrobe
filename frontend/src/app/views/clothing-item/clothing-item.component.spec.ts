@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { ClothingItemCardModule } from 'src/app/shared/components/clothing-item-card/clothing-item-card.module';
 import { ClothingItemComponent } from './clothing-item.component';
 
 describe('ClothingItemComponent', () => {
@@ -9,7 +10,7 @@ describe('ClothingItemComponent', () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [ClothingItemComponent],
-            imports: [],
+            imports: [ClothingItemCardModule],
         });
         fixture = TestBed.createComponent(ClothingItemComponent);
         component = fixture.componentInstance;
