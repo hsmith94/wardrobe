@@ -6,6 +6,9 @@
     "scripts": {
         "dev": "ts-node src/main.ts",
         "dev:watch": "nodemon --watch src src/main.ts",
+        "start": "node dist/src/main.js",
+        "build": "tsc --outDir dist --skipLibCheck",
+        "build-and-start": "npm run build && npm run start",
         "test": "jest"
     },
     "keywords": [],

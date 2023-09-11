@@ -4,6 +4,11 @@
   "description": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run --prefix frontend build && npm run --prefix backend build",
+    "copy-frontend-to-backend": "mkdir -p ./backend/dist/frontend && cp -r ./frontend/dist/** ./backend/dist",
+    "package": "npm run build && npm run copy-frontend-to-backend",
+    "prestart": "npm run package",
+    "start": "npm run --prefix backend start",
     "dev": "concurrently -n frontend,database,backend -c magenta,yellow,green \"npm run --prefix frontend dev\" \"npm run --prefix database dev\" \"npm run --prefix backend dev\"",
     "dev:watch": "concurrently -n frontend,database,backend -c magenta,yellow,green \"npm run --prefix frontend dev:watch\" \"npm run --prefix database dev\" \"npm run --prefix backend dev:watch\""
   },
