@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
+    "postinstall": "npm --prefix frontend install &&& npm --prefix backend install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run --prefix frontend build && npm run --prefix backend build",
     "copy-bundle-to-backend": "mkdir -p ./backend/dist/frontend && cp -r ./frontend/dist/** ./backend/dist",
