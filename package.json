@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "preinstall": "rm -rf ./frontend/node_modules && rm -rf ./backend/node_modules && rm -rf ./database/node_modules",
-    "postinstall": "npm --prefix frontend install && npm --prefix backend install",
+    "postinstall": "npm --prefix frontend install --force && npm --prefix backend install --force",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run --prefix frontend build && npm run --prefix backend build",
     "copy-bundle-to-backend": "mkdir -p ./backend/dist/frontend && cp -r ./frontend/dist/** ./backend/dist",
