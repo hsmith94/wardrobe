@@ -7,7 +7,7 @@ import { ClothingItem, ClothingItemId } from 'src/app/models/clothing-item.model
 import { DEFAULT_SNACK_BAR_DURATION } from 'src/app/shared/constants/snack-bar.constants';
 import { ClothesApiService } from 'src/app/shared/services/api-services/clothes-api.service';
 import { BreakpointStateService } from 'src/app/shared/services/breakpoint-state/breakpoint-state.service';
-import { ClothingItemModalService } from '../clothing-item/clothing-item-modal/clothing-item-modal.service';
+import { ClothingItemModalService } from '../../shared/modals/clothing-item-modal/clothing-item-modal.service';
 
 namespace ClothesUtils {
     export function findItem(clothes: ClothingItem[], itemId: ClothingItemId): ClothingItem | undefined {
@@ -93,10 +93,19 @@ export class WardrobeComponent implements OnInit, OnDestroy {
         this.removeQueryParams();
     }
 
+    private _showItem(clothingItem: ClothingItem): void {
+        const afterDismissed$ = this.clothingItemModal.show({ clothingItem });
+
+        const sub = afterDismissed$.subscribe(() => {
+            this.removeQueryParams();
+            sub.unsubscribe();
+        });
+    }
+
     private showItem(itemId: ClothingItemId): void {
         const clothingItem = this.findItem(itemId);
         if (clothingItem) {
-            this.clothingItemModal.show({ clothingItem });
+            this._showItem(clothingItem);
         } else {
             this.handleItemNotFound(itemId);
         }

@@ -6,7 +6,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import { ClothesApiService } from 'src/app/shared/services/api-services/clothes-api.service';
 import { BreakpointStateService } from 'src/app/shared/services/breakpoint-state/breakpoint-state.service';
-import { ClothingItemModalService } from '../clothing-item/clothing-item-modal/clothing-item-modal.service';
+import { ClothingItemModalService } from '../../shared/modals/clothing-item-modal/clothing-item-modal.service';
 import { WardrobeViewLayoutModule } from './wardrobe-view-layout/wardrobe-view-layout.module';
 import { WardrobeComponent } from './wardrobe.component';
 

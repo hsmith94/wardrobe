@@ -1,5 +1,5 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
-import { Subscription, forkJoin } from 'rxjs';
+import { Subscription, combineLatest } from 'rxjs';
 import { BreakpointStateService } from 'src/app/shared/services/breakpoint-state/breakpoint-state.service';
 
 @Component({
@@ -15,16 +15,24 @@ export class WardrobeViewLayoutComponent implements OnInit, OnDestroy {
 
     constructor(@Inject(BreakpointStateService) private breakpointState: BreakpointStateService) {}
 
+    setDesktop(): void {
+        this.isUiSideBySide = true;
+        this.isSidenavOpen = true;
+    }
+
+    setMobile(): void {
+        this.isUiSideBySide = false;
+        this.isSidenavOpen = false;
+    }
+
     ngOnInit(): void {
         this.subscriptions.push(
-            forkJoin([this.breakpointState.isMediumScreen$, this.breakpointState.isLargeScreen$]).subscribe(
+            combineLatest([this.breakpointState.isMediumScreen$, this.breakpointState.isLargeScreen$]).subscribe(
                 ([isMediumScreen, isLargeScreen]) => {
                     if (isMediumScreen || isLargeScreen) {
-                        this.isUiSideBySide = true;
-                        this.isSidenavOpen = true;
+                        this.setDesktop();
                     } else {
-                        this.isUiSideBySide = false;
-                        this.isSidenavOpen = false;
+                        this.setMobile();
                     }
                 },
             ),

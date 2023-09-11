@@ -1,11 +1,10 @@
-import { JsonPipe } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatDialogModule } from '@angular/material/dialog';
+import { ClothingItemCardModule } from 'src/app/shared/components/clothing-item-card/clothing-item-card.module';
 import { ClothingItemComponent } from './clothing-item.component';
 
 @NgModule({
     declarations: [ClothingItemComponent],
-    imports: [JsonPipe, MatDialogModule],
+    imports: [ClothingItemCardModule],
     providers: [],
     bootstrap: [],
     exports: [ClothingItemComponent],

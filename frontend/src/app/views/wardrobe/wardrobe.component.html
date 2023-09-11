@@ -22,8 +22,8 @@ Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
             <mat-card-content>
                 <mat-grid-list [cols]="gridListConfig.cols" rowHeight="1:1.5" gutterSize="8">
                     <mat-grid-tile class="clothing-item-tile" *ngFor="let clothingItem of clothes">
-                        <app-clothing-item-card class="clothing-item-card"
-                            [clothingItem]="clothingItem"></app-clothing-item-card>
+                        <app-clothing-item-card class="clothing-item-card clickable" [clothingItem]="clothingItem"
+                            routerLink="." [queryParams]="{ id: clothingItem.itemId }"></app-clothing-item-card>
                     </mat-grid-tile>
                 </mat-grid-list>
             </mat-card-content>

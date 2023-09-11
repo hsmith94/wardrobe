@@ -1,0 +1,18 @@
+:host {
+    overflow-y: auto;
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.close-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    color: black;
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.04);
+    }
+}
