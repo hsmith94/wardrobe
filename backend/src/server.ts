@@ -16,6 +16,7 @@ export async function startServer(): Promise<void> {
         basePath: API_BASE_PATH,
         commonMiddlewares: MIDDLEWARES,
         routes: ROUTES,
+        /** `bundleDir` is only set for production because `dist` will only be correctly populated following a production build. */
         bundleDir: environment.IS_PRODUCTION ? BUNDLE_DIR : undefined,
     });
 

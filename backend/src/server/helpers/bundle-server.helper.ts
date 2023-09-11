@@ -1,46 +1,17 @@
 import * as express from 'express';
 import path from 'path';
 
-const INDEX_HTML_FILENAME = 'index.html';
-
-const ROOT_PATH = '/';
-const ROOT_PATH_GLOB = '*';
-
-/** @note This must be kept in sync with `<base href>` in the frontend. */
-const APP_PATH = '/app';
-const APP_PATH_GLOB = APP_PATH;
-
 export function assignBundleServer(app: express.Application, bundleDir: string): void {
+    console.log('Mounting bundle directory:', bundleDir);
+
+    // Redirect root to app
     app.get('/', (req, res) => res.redirect('/app'));
 
-    app.use(express.static(path.resolve(bundleDir, INDEX_HTML_FILENAME)));
-    // app.use('/', express.static(path.resolve(bundleDir, INDEX_HTML_FILENAME)));
+    // Serve index.html on root and all other paths
+    app.use('/', express.static(path.resolve(bundleDir, 'index.html')));
 
-    app.use('*', express.static(bundleDir));
-
+    // Serve bundles app files
     app.use(express.static(bundleDir));
-    // app.use('*', express.static(bundleDir));
-
     app.use('/app', express.static(bundleDir));
-
-    // return [
-    //     Route.fromConfig({
-    //         path: ROOT_PATH,
-    //         method: RouteMethod.GET,
-    //         handler: (req, res) => res.redirect(APP_PATH),
-    //     }),
-    //     Route.fromConfig({
-    //         path: ROOT_PATH_GLOB,
-    //         method: RouteMethod.USE,
-    //         handler: express.static(appIndexFile),
-    //     }),
-    //     Route.fromConfig({
-    //         path: '',
-    //         method: RouteMethod.USE,
-    //         handler: express.static(bundleDir),
-    //     }),
-    //     Route.fromConfig({
-    //         path: APP_PATH_GLOB,
-    //         method: RouteMethod.USE,
-    //         handler: express.static(bundleDir),
+    app.use('/app/*', express.static(bundleDir));
 }
