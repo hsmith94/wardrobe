@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/hsmith94/wardrobe#readme",
   "dependencies": {
+    "@angular/cli": "^16.2.1",
     "typescript": "~5.1.3"
   },
   "engines": {
