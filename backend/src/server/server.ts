@@ -1,5 +1,7 @@
 import type Express from 'express';
 import express from 'express';
+import { BundleRoutes } from './helpers/bundle-server-routes';
+import { assignBundleServer } from './helpers/bundle-server.helper';
 import { applyRoutes as assignRoutes } from './helpers/routes.helper';
 import { Route, RouteMiddleware } from './models/routes.model';
 
@@ -9,14 +11,19 @@ type ServerConfig = {
     basePath?: string;
     commonMiddlewares?: RouteMiddleware[];
     routes: Route[];
+    bundleDir?: string;
 };
 
 export class Server {
     public appName!: string;
     public port!: number;
     public basePath!: string;
-    public commonMiddlewares!: RouteMiddleware[];
-    public routes!: Route[];
+
+    private commonMiddlewares!: RouteMiddleware[];
+    private routes!: Route[];
+
+    private bundleDir?: string;
+    private bundleServingRoutes: Route[];
 
     private isConfigured: boolean = false;
 
@@ -26,6 +33,8 @@ export class Server {
         this.appName = config.appName;
         this.port = config.port;
         this.routes = config.routes;
+        this.bundleServingRoutes = config.bundleDir ? [...BundleRoutes.fromDir(config.bundleDir)] : [];
+        this.bundleDir = config.bundleDir;
 
         // Optional properties
         this.basePath = config.basePath ?? '';
@@ -41,6 +50,14 @@ export class Server {
         const app = this.express();
 
         assignRoutes(app, this.basePath, this.commonMiddlewares, this.routes);
+
+        if (this.bundleDir) {
+            assignBundleServer(app, this.bundleDir);
+        }
+
+        // if (!isEmpty(this.bundleServingRoutes)) {
+        //     assignRoutes(app, undefined, undefined, this.bundleServingRoutes);
+        // }
 
         return app;
     }

@@ -19,6 +19,7 @@ export enum RouteMethod {
     OPTIONS = 'options',
     HEAD = 'head',
     ALL = 'all',
+    USE = 'use',
 }
 
 export class Route {
