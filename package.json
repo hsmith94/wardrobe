@@ -10,7 +10,7 @@
     "copy-node-modules-to-dist": "cp -r ./backend/node_modules ./dist",
     "copy-files": "npm run copy-bundle-to-backend && npm run copy-dist-to-root && npm run copy-node-modules-to-dist",
     "build-local": "npm run --prefix frontend build && npm run --prefix backend build && npm run copy-files",
-    "build": "echo \"Run `npm run build-local` to build the distribution package. `npm run build` is not used to workaround Heroku pre-deployment build.\"",
+    "build": "echo \"Run 'npm run build-local' to build the distribution package. 'npm run build' is not used to workaround Heroku pre-deployment build.\"",
     "start": "node dist/src/main.js",
     "dev": "concurrently -n frontend,database,backend -c magenta,yellow,green \"npm run --prefix frontend dev\" \"npm run --prefix database dev\" \"npm run --prefix backend dev\"",
     "dev:watch": "concurrently -n frontend,database,backend -c magenta,yellow,green \"npm run --prefix frontend dev:watch\" \"npm run --prefix database dev\" \"npm run --prefix backend dev:watch\""
