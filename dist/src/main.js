@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var constants_1 = require("./constants");
-var datasource_1 = require("./datasource");
+// import { startDatasource } from './datasource';
 var server_1 = require("./server");
 function main() {
     return __awaiter(this, void 0, void 0, function () {
@@ -45,22 +45,21 @@ function main() {
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, (0, datasource_1.startDatasource)()];
-                case 1:
-                    _a.sent();
+                    _a.trys.push([0, 2, , 3]);
+                    // await startDatasource();
                     return [4 /*yield*/, (0, server_1.startServer)().then(function () {
                             console.log("".concat(constants_1.APP_NAME, " listening on port: ").concat(constants_1.API_PORT));
                         })];
-                case 2:
+                case 1:
+                    // await startDatasource();
                     _a.sent();
-                    return [3 /*break*/, 4];
-                case 3:
+                    return [3 /*break*/, 3];
+                case 2:
                     err_1 = _a.sent();
                     console.error("FATAL: ".concat(err_1.message, "\n\n").concat(err_1.stack));
                     process.exit(1);
-                    return [3 /*break*/, 4];
-                case 4: return [2 /*return*/];
+                    return [3 /*break*/, 3];
+                case 3: return [2 /*return*/];
             }
         });
     });

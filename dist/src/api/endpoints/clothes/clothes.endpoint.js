@@ -48,11 +48,13 @@ var ClothesEndpoint;
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, (0, clothes_handler_provider_1.provideClothesHandler)()];
+                    return [4 /*yield*/, (0, clothes_handler_provider_1.provideClothesHandlerInMemory)()];
                 case 1:
                     clothesHandler = _a.sent();
+                    // const clothesHandler: ClothesHandler = await provideClothesHandler();
                     return [4 /*yield*/, clothesHandler.getClothes(req, res)];
                 case 2:
+                    // const clothesHandler: ClothesHandler = await provideClothesHandler();
                     _a.sent();
                     return [3 /*break*/, 4];
                 case 3:
@@ -74,11 +76,13 @@ var ClothesEndpoint;
             switch (_a.label) {
                 case 0:
                     _a.trys.push([0, 3, , 4]);
-                    return [4 /*yield*/, (0, clothes_handler_provider_1.provideClothesHandler)()];
+                    return [4 /*yield*/, (0, clothes_handler_provider_1.provideClothesHandlerInMemory)()];
                 case 1:
                     clothesHandler = _a.sent();
+                    // const clothesHandler: ClothesHandler = await provideClothesHandler();
                     return [4 /*yield*/, clothesHandler.getClothingItem(req, res)];
                 case 2:
+                    // const clothesHandler: ClothesHandler = await provideClothesHandler();
                     _a.sent();
                     return [3 /*break*/, 4];
                 case 3:

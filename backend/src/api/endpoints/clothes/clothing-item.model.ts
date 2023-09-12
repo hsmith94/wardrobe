@@ -7,7 +7,7 @@ import { ClothingItemRow, ClothingItemRowDto } from './clothing-items.repo';
 export type ClothingItemId = string;
 
 type ClothingItemMetadata = {
-    [key: string]: string;
+    [key: string]: string | number;
 };
 
 type ClothingItemProperty = {

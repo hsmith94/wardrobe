@@ -1,10 +1,10 @@
 import { API_PORT, APP_NAME } from './constants';
-import { startDatasource } from './datasource';
+// import { startDatasource } from './datasource';
 import { startServer } from './server';
 
 async function main() {
     try {
-        await startDatasource();
+        // await startDatasource();
         await startServer().then(() => {
             console.log(`${APP_NAME} listening on port: ${API_PORT}`);
         });

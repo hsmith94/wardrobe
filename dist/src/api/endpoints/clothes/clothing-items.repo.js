@@ -60,7 +60,7 @@ var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
     return to.concat(ar || Array.prototype.slice.call(from));
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ClothingItemsRepo = exports.ClothingItemRowDto = void 0;
+exports.ClothingItemsRepoInMemory = exports.ClothingItemsRepo = exports.ClothingItemRowDto = void 0;
 var http_errors_1 = require("../../errors/http-errors");
 var clothing_item_model_1 = require("./clothing-item.model");
 var ClothingItemRowDto = /** @class */ (function () {
@@ -140,6 +140,7 @@ var ClothingItemsRepo = /** @class */ (function () {
                     case 1:
                         rows = _b.sent();
                         clothingItems = rows.map(function (row) { return clothing_item_model_1.ClothingItemDto.from(ClothingItemRowDto, row); });
+                        console.log(JSON.stringify(clothingItems, null, 2));
                         return [2 /*return*/, clothingItems];
                 }
             });
@@ -171,3 +172,145 @@ var ClothingItemsRepo = /** @class */ (function () {
     return ClothingItemsRepo;
 }());
 exports.ClothingItemsRepo = ClothingItemsRepo;
+var ClothingItemsRepoInMemory = /** @class */ (function (_super) {
+    __extends(ClothingItemsRepoInMemory, _super);
+    function ClothingItemsRepoInMemory() {
+        var _this = _super.call(this, undefined) || this;
+        _this.clothingItemsAllUsers = [
+            {
+                itemId: 'c48933d5-46ae-11ee-a93f-0242ac140002',
+                userId: 'HARRY',
+                name: 'White shirt',
+                description: 'An Oxford cotton shirt from TM Lewin',
+                picture: null,
+                createDate: new Date('2023-08-29T19:58:13.000Z'),
+                updateDate: new Date('2023-08-29T19:58:13.000Z'),
+                properties: [
+                    {
+                        key: 'MATERIAL',
+                        value: 'ELASTANE',
+                        metadata: {
+                            percentage: 10,
+                        },
+                    },
+                    {
+                        key: 'MATERIAL',
+                        value: 'COTTON',
+                        metadata: {
+                            subtype: 'OXFORD',
+                            percentage: 90,
+                        },
+                    },
+                    {
+                        key: 'HAS_PATTERN',
+                        value: 'FALSE',
+                        metadata: null,
+                    },
+                    {
+                        key: 'COLOR',
+                        value: 'WHITE',
+                        metadata: null,
+                    },
+                ],
+            },
+            {
+                itemId: 'c5b75e75-4a9a-11ee-ad74-0242ac140002',
+                userId: 'HARRY',
+                name: 'Pink stretch shirt',
+                description: 'A stretch cotton shirt from TM Lewin',
+                picture: null,
+                createDate: new Date('2023-09-03T19:45:09.000Z'),
+                updateDate: new Date('2023-09-03T19:45:09.000Z'),
+                properties: [],
+            },
+            {
+                itemId: 'c5cdabe6-4a9a-11ee-ad74-0242ac140002',
+                userId: 'HARRY',
+                name: 'Pink linen shirt',
+                description: 'A linen shirt from TM Lewin',
+                picture: 'https://wardrobe-public.s3.eu-west-2.amazonaws.com/app-assets/user-uploads/TEST/TEST-Mens-Pink-Long-Sleeve-Linen-Shirt.jpeg',
+                createDate: new Date('2023-09-03T19:45:09.000Z'),
+                updateDate: new Date('2023-09-03T19:45:09.000Z'),
+                properties: [],
+            },
+            {
+                itemId: 'c5ce6148-4a9a-11ee-ad74-0242ac140002',
+                userId: 'HARRY',
+                name: 'White linen shirt',
+                description: 'A white linen shirt from Charles Tyrwhitt, bought from British Heart Foundation',
+                picture: 'https://wardrobe-public.s3.eu-west-2.amazonaws.com/app-assets/user-uploads/TEST/TEST-Mens-White-Long-Sleeve-Linen-Shirt.jpeg',
+                createDate: new Date('2023-09-03T19:45:09.000Z'),
+                updateDate: new Date('2023-09-03T19:45:09.000Z'),
+                properties: [
+                    {
+                        key: 'MATERIAL',
+                        value: 'LINEN',
+                        metadata: {
+                            percentage: 100,
+                        },
+                    },
+                ],
+            },
+            {
+                itemId: '11f24178-b397-4d9a-ae69-ab0c8dfe5211',
+                userId: 'LENA',
+                name: 'Pink skirt',
+                description: '',
+                picture: null,
+                createDate: new Date('2023-09-03T19:45:09.000Z'),
+                updateDate: new Date('2023-09-03T19:45:09.000Z'),
+                properties: [],
+            },
+            {
+                itemId: 'cebf55cd-9a92-4e3d-afa2-cf3e3ba15f6e',
+                userId: 'LENA',
+                name: 'White rollneck',
+                description: 'A white rollneck sweater from Uniqlo',
+                picture: null,
+                createDate: new Date('2023-09-04T19:20:09.000Z'),
+                updateDate: new Date('2023-09-04T19:20:09.000Z'),
+                properties: [
+                    {
+                        key: 'COLOR',
+                        value: 'WHITE',
+                        metadata: null,
+                    },
+                    {
+                        key: 'MATERIAL',
+                        value: 'COTTON',
+                        metadata: {
+                            percentage: 100,
+                        },
+                    },
+                ],
+            },
+        ];
+        return _this;
+    }
+    ClothingItemsRepoInMemory.prototype.getClothingItems = function (userId) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                return [2 /*return*/, this.clothingItemsAllUsers.filter(function (item) { return item.userId === userId; })];
+            });
+        });
+    };
+    ClothingItemsRepoInMemory.prototype.getClothingItem = function (userId, itemId) {
+        return __awaiter(this, void 0, void 0, function () {
+            var clothingItems, item;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.getClothingItems(userId)];
+                    case 1:
+                        clothingItems = _a.sent();
+                        item = clothingItems.find(function (item) { return item.itemId === itemId; });
+                        if (item === undefined) {
+                            throw new http_errors_1.HttpErrors.NotFoundError("Clothing Item with id \"".concat(itemId, "\" not found"));
+                        }
+                        return [2 /*return*/, item];
+                }
+            });
+        });
+    };
+    return ClothingItemsRepoInMemory;
+}(ClothingItemsRepo));
+exports.ClothingItemsRepoInMemory = ClothingItemsRepoInMemory;

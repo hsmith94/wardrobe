@@ -1,7 +1,7 @@
 import { getDatasource } from '../../../datasource';
 import { ClothesHandler } from './clothes.handler';
 import { ClothesService } from './clothes.service';
-import { ClothingItemsRepo } from './clothing-items.repo';
+import { ClothingItemsRepo, ClothingItemsRepoInMemory } from './clothing-items.repo';
 
 export const provideClothesHandler = (): Promise<ClothesHandler> => {
     return getDatasource().connect((connection) => {
@@ -10,4 +10,11 @@ export const provideClothesHandler = (): Promise<ClothesHandler> => {
         const clothesHandler = new ClothesHandler(clothesService);
         return clothesHandler;
     });
+};
+
+export const provideClothesHandlerInMemory = (): Promise<ClothesHandler> => {
+    const clothingItemsRepo = new ClothingItemsRepoInMemory();
+    const clothesService = new ClothesService(clothingItemsRepo);
+    const clothesHandler = new ClothesHandler(clothesService);
+    return Promise.resolve(clothesHandler);
 };
