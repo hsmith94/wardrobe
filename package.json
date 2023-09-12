@@ -6,8 +6,11 @@
     "postinstall": "npm --prefix frontend install && npm --prefix backend install",
     "test": "echo \"Error: no test specified\" && exit 1",
     "copy-bundle-to-backend": "mkdir -p ./backend/dist/frontend && cp -r ./frontend/dist/** ./backend/dist",
-    "build": "npm run --prefix frontend build && npm run --prefix backend build && npm run copy-bundle-to-backend",
-    "start": "npm run --prefix backend start",
+    "copy-dist-to-root": "mkdir -p ./dist && cp -r ./backend/dist/** ./dist",
+    "copy-node-modules-to-dist": "cp -r ./backend/node_modules ./dist",
+    "copy-files": "npm run copy-bundle-to-backend && npm run copy-dist-to-root && npm run copy-node-modules-to-dist",
+    "build": "npm run --prefix frontend build && npm run --prefix backend build && npm run copy-files",
+    "start": "node dist/src/main.js",
     "dev": "concurrently -n frontend,database,backend -c magenta,yellow,green \"npm run --prefix frontend dev\" \"npm run --prefix database dev\" \"npm run --prefix backend dev\"",
     "dev:watch": "concurrently -n frontend,database,backend -c magenta,yellow,green \"npm run --prefix frontend dev:watch\" \"npm run --prefix database dev\" \"npm run --prefix backend dev:watch\""
   },
