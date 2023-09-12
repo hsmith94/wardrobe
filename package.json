@@ -3,15 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "preinstall": "rm -rf ./frontend/node_modules && rm -rf ./backend/node_modules && rm -rf ./database/node_modules",
-    "postinstall": "npm --prefix frontend install --force && npm --prefix backend install --force",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run --prefix frontend build && npm run --prefix backend build",
     "copy-bundle-to-backend": "mkdir -p ./backend/dist/frontend && cp -r ./frontend/dist/** ./backend/dist",
-    "package": "npm run build && npm run copy-bundle-to-backend",
-    "prestart": "npm run package",
-    "start-dev-database-and-server": "echo \"WARNING: This option uses an unsafe development database and is not production ready!\" && concurrently -n database,database \"npm run --prefix database dev\" \"npm run --prefix backend start\"",
-    "start": "npm run start-dev-database-and-server",
+    "build": "npm run --prefix frontend build && npm run --prefix backend build && npm run copy-bundle-to-backend",
+    "start": "npm run --prefix backend start",
     "dev": "concurrently -n frontend,database,backend -c magenta,yellow,green \"npm run --prefix frontend dev\" \"npm run --prefix database dev\" \"npm run --prefix backend dev\"",
     "dev:watch": "concurrently -n frontend,database,backend -c magenta,yellow,green \"npm run --prefix frontend dev:watch\" \"npm run --prefix database dev\" \"npm run --prefix backend dev:watch\""
   },
